@@ -8,3 +8,19 @@ const itineraries={
   west:{name:'Pacific Northwest scenic drives',stops:['Portland, Oregon','Hood River, Oregon','Bend, Oregon','Crater Lake area, Oregon','Ashland, Oregon'],extra:'Use an extra day for a rest stop or weather-dependent scenic outing.'}
 };
 const planner=document.querySelector('#route-planner');planner?.addEventListener('submit',event=>{event.preventDefault();let region=document.querySelector('#region').value;let days=Number(document.querySelector('#days').value);let pace=document.querySelector('#pace').value;let data=itineraries[region];let stops=days===3?[data.stops[0],data.stops[2],data.stops[4]]:data.stops;let html=`<h3>${data.name} · ${days}-day starting outline</h3><p>Travel style: <strong>${pace}</strong>. Suggested sequence to research:</p><ol>${stops.map(s=>`<li>${s}</li>`).join('')}</ol>`;if(days===7)html+=`<p><strong>Two flexible days:</strong> ${data.extra} Choose where to place them after checking drive distances.</p>`;html+='<p class="small muted">This is a planning outline, not driving directions or a booked itinerary. Verify travel times, conditions, opening dates, reservations and accessibility independently before you go.</p>';let output=document.querySelector('#route-output');output.innerHTML=html;output.hidden=false;output.scrollIntoView({behavior:'smooth',block:'nearest'});});
+
+/* Google Analytics - 48 and Beyond Travel */
+if (!document.querySelector('script[src*="gtag/js?id=G-SL8B9PZDFK"]')) {
+  const gaScript = document.createElement('script');
+  gaScript.async = true;
+  gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-SL8B9PZDFK';
+  document.head.appendChild(gaScript);
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function() {
+    window.dataLayer.push(arguments);
+  };
+
+  window.gtag('js', new Date());
+  window.gtag('config', 'G-SL8B9PZDFK');
+}
